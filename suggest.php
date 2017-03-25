@@ -18,8 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   
   require("inc/phpmailer/class.phpmailer.php");
+//   require("inc/phpmailer/class.smtp.php");
   
-  $mail = new PHPMailer;
+  $mail = new PHPMailer();
   
   if (!isset($error_message) && !$mail->ValidateAddress($email)) {
     $error_message = "Invalid Email Address";
@@ -31,18 +32,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_body .= "Email " . $email . "\n";
     $email_body .= "Suggested Item\n";
     $email_body .= "Category " . $category . "\n";
-    $email_body .= "Title " . $Title . "\n";
+    $email_body .= "Title " . $title . "\n";
     $email_body .= "Format " . $format . "\n";
     $email_body .= "Genre " . $genre . "\n";
     $email_body .= "Year " . $year . "\n";
     $email_body .= "Details " . $details . "\n";
     
     $mail->setFrom($email, $name);
-    $mail->addAddress('maliya241@gmail.com', 'Joe User');     // Add a recipient
+    $mail->addAddress('mmy241@aol.com', 'Joe User');     // Add a recipient
     
     $mail->isHTML(false);                                  // Set email format to HTML
   
-    $mail->Subject = 'Personal Media Library Suggestion from ' . $name;
+    $mail->Subject = 'Order from ' . $name;
     $mail->Body    = $email_body;
     
     if($mail->send()) {
